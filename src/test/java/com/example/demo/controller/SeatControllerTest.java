@@ -23,4 +23,28 @@ public class SeatControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(16)));
     }
+
+    @Test
+    public void shouldReturnSeatById() throws Exception {
+
+        final String SEAT_ID = "1";
+        final String row = "A";
+        final Integer positionInRow = 1;
+
+        this.mockMvc.perform(get("/cinema/seat/" + SEAT_ID))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.rowName").value(row))
+                .andExpect(jsonPath("$.positionInRow").value(positionInRow));
+
+    }
+
+    @Test
+    public void shouldReturn204IfSeatIdDoesNotExist() throws Exception {
+
+        final String SEAT_ID = "1111111111";
+
+        this.mockMvc.perform(get("/cinema/seat/" + SEAT_ID))
+                .andExpect(status().isNoContent());
+    }
 }
