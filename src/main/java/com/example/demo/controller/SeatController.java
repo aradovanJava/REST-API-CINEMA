@@ -44,7 +44,7 @@ public class SeatController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> saveNewSeat(@RequestBody Seat updatedSeat, @PathVariable Long id) {
+    public ResponseEntity<?> updateNewSeat(@RequestBody Seat updatedSeat, @PathVariable Long id) {
         Optional<Seat> updatedSeatOptional = seatService.updateSeat(updatedSeat, id);
 
         if(updatedSeatOptional.isPresent()) {
