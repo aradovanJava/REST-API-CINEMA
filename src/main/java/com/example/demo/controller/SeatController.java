@@ -25,7 +25,7 @@ public class SeatController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> getSeatById(@PathVariable Long id) {
+    public ResponseEntity<?> getSeatById(@PathVariable Integer id) {
         Optional<Seat> optionalSeat = seatService.getSeatById(id);
 
         if(optionalSeat.isPresent()) {
@@ -44,7 +44,7 @@ public class SeatController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateNewSeat(@RequestBody Seat updatedSeat, @PathVariable Long id) {
+    public ResponseEntity<?> updateNewSeat(@RequestBody Seat updatedSeat, @PathVariable Integer id) {
         Optional<Seat> updatedSeatOptional = seatService.updateSeat(updatedSeat, id);
 
         if(updatedSeatOptional.isPresent()) {
@@ -56,7 +56,7 @@ public class SeatController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteSeatById(@PathVariable Long id) {
+    public ResponseEntity<?> deleteSeatById(@PathVariable Integer id) {
         seatService.deleteSeat(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

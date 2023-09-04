@@ -10,12 +10,12 @@ public interface StageService {
 
     List<Stage> getAllStages();
 
-    Optional<Stage> getStageById(Long id);
+    Optional<Stage> getStageById(Integer id);
 
     void saveNewStage(Stage newStage);
 
-    Optional<Stage> updateStage(Stage updatedStage, Long id);
+    Optional<Stage> updateStage(Stage updatedStage, Integer id);
 
-    void deleteStage(Long id);
+    void deleteStage(Integer id);
 
 }

@@ -40,7 +40,7 @@ public class FileStageRepository implements StageRepository {
 
         for(int i = 0; i < lines.size()/NUMBER_OF_STAGE_ROWS; i++) {
             String idString = lines.get(i * NUMBER_OF_STAGE_ROWS);
-            Long id = Long.parseLong(idString);
+            Integer id = Integer.parseInt(idString);
             String stageName = lines.get(i * NUMBER_OF_STAGE_ROWS + 1);
             String seatsGroup = lines.get(i * NUMBER_OF_STAGE_ROWS + 2);
             String[] seatsIds = seatsGroup.split("\\s+");
@@ -48,7 +48,7 @@ public class FileStageRepository implements StageRepository {
             List<Seat> seatList = new ArrayList<>();
 
             for(String seatIdString : seatsIds) {
-                Long seatId = Long.parseLong(seatIdString);
+                Integer seatId = Integer.parseInt(seatIdString);
                 Optional<Seat> seatOptional = seatRepository.getSeatById(seatId);
 
                 if(seatOptional.isPresent()) {
@@ -64,14 +64,14 @@ public class FileStageRepository implements StageRepository {
     }
 
     @Override
-    public Optional<Stage> getStageById(Long id) {
+    public Optional<Stage> getStageById(Integer id) {
         return getAllStages().stream().filter(s -> s.getId().equals(id)).findFirst();
     }
 
     @Override
     public void saveNewStage(Stage newStage) {
         List<Stage> allStages = getAllStages();
-        Long highestId = allStages.stream()
+        Integer highestId = allStages.stream()
                 .map(s -> s.getId())
                 .max((id1, id2) -> id1.compareTo(id2))
                 .get();
@@ -110,7 +110,7 @@ public class FileStageRepository implements StageRepository {
     }
 
     @Override
-    public Optional<Stage> updateStage(Stage updatedStage, Long id) {
+    public Optional<Stage> updateStage(Stage updatedStage, Integer id) {
         List<Stage> allStages = getAllStages();
 
         Optional updatedStageOptional = Optional.empty();
@@ -132,7 +132,7 @@ public class FileStageRepository implements StageRepository {
     }
 
     @Override
-    public void deleteStage(Long id) {
+    public void deleteStage(Integer id) {
         List<Stage> allStages = getAllStages();
 
         List<Stage> listWithoutTheDeletedStage =

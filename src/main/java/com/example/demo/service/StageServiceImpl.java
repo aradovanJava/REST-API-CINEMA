@@ -20,7 +20,7 @@ public class StageServiceImpl implements StageService {
     }
 
     @Override
-    public Optional<Stage> getStageById(Long id) {
+    public Optional<Stage> getStageById(Integer id) {
         return stageRepository.getStageById(id);
     }
 
@@ -30,12 +30,12 @@ public class StageServiceImpl implements StageService {
     }
 
     @Override
-    public Optional<Stage> updateStage(Stage updatedStage, Long id) {
+    public Optional<Stage> updateStage(Stage updatedStage, Integer id) {
         return stageRepository.updateStage(updatedStage, id);
     }
 
     @Override
-    public void deleteStage(Long id) {
+    public void deleteStage(Integer id) {
         stageRepository.deleteStage(id);
     }
 }

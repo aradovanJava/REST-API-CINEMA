@@ -5,5 +5,5 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 public abstract class BaseEntity {
-    private Long id;
+    private Integer id;
 }

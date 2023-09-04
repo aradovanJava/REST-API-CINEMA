@@ -11,7 +11,7 @@ public class Seat extends BaseEntity {
     private String rowName;
     private Integer positionInRow;
 
-    public Seat(Long id, String rowName, Integer positionInRow) {
+    public Seat(Integer id, String rowName, Integer positionInRow) {
         super(id);
         this.rowName = rowName;
         this.positionInRow = positionInRow;

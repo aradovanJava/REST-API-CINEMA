@@ -19,7 +19,7 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public Optional<Seat> getSeatById(Long id) {
+    public Optional<Seat> getSeatById(Integer id) {
         return seatRepository.getSeatById(id);
     }
 
@@ -29,12 +29,12 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public Optional<Seat> updateSeat(Seat updatedSeat, Long id) {
+    public Optional<Seat> updateSeat(Seat updatedSeat, Integer id) {
         return seatRepository.updateSeat(updatedSeat, id);
     }
 
     @Override
-    public void deleteSeat(Long id) {
+    public void deleteSeat(Integer id) {
         seatRepository.deleteSeat(id);
     }
 

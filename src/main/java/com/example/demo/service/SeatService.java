@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface SeatService {
     List<Seat> getAllSeats();
 
-    Optional<Seat> getSeatById(Long id);
+    Optional<Seat> getSeatById(Integer id);
 
     void saveNewSeat(Seat newSeat);
 
-    Optional<Seat> updateSeat(Seat updatedSeat, Long id);
+    Optional<Seat> updateSeat(Seat updatedSeat, Integer id);
 
-    void deleteSeat(Long id);
+    void deleteSeat(Integer id);
 }

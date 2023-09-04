@@ -25,7 +25,7 @@ public class StageController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> getStageById(@PathVariable Long id) {
+    public ResponseEntity<?> getStageById(@PathVariable Integer id) {
         Optional<Stage> optionalStage = stageService.getStageById(id);
 
         if(optionalStage.isPresent()) {
@@ -44,7 +44,7 @@ public class StageController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateNewStage(@RequestBody Stage updatedStage, @PathVariable Long id) {
+    public ResponseEntity<?> updateNewStage(@RequestBody Stage updatedStage, @PathVariable Integer id) {
         Optional<Stage> updatedStageOptional = stageService.updateStage(updatedStage, id);
 
         if(updatedStageOptional.isPresent()) {
@@ -56,7 +56,7 @@ public class StageController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteStageById(@PathVariable Long id) {
+    public ResponseEntity<?> deleteStageById(@PathVariable Integer id) {
         stageService.deleteStage(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

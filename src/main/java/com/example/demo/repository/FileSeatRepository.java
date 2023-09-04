@@ -34,7 +34,7 @@ public class FileSeatRepository implements SeatRepository {
 
         for(int i = 0; i < lines.size()/NUMBER_OF_SEAT_ROWS; i++) {
             String idString = lines.get(i * NUMBER_OF_SEAT_ROWS);
-            Long id = Long.parseLong(idString);
+            Integer id = Integer.parseInt(idString);
             String rowName = lines.get(i * NUMBER_OF_SEAT_ROWS + 1);
             Integer rowPosition = Integer.parseInt(lines.get(i * NUMBER_OF_SEAT_ROWS + 2));
             Seat newSeat = new Seat(id, rowName, rowPosition);
@@ -45,14 +45,14 @@ public class FileSeatRepository implements SeatRepository {
     }
 
     @Override
-    public Optional<Seat> getSeatById(Long id) {
+    public Optional<Seat> getSeatById(Integer id) {
         return getAllSeats().stream().filter(s -> s.getId().equals(id)).findFirst();
     }
 
     @Override
     public void saveNewSeat(Seat newSeat) {
         List<Seat> allSeats = getAllSeats();
-        Long highestId = allSeats.stream()
+        Integer highestId = allSeats.stream()
                 .map(s -> s.getId())
                 .max((id1, id2) -> id1.compareTo(id2))
                         .get();
@@ -86,7 +86,7 @@ public class FileSeatRepository implements SeatRepository {
     }
 
     @Override
-    public Optional<Seat> updateSeat(Seat updatedSeat, Long id) {
+    public Optional<Seat> updateSeat(Seat updatedSeat, Integer id) {
 
         List<Seat> allSeats = getAllSeats();
 
@@ -109,7 +109,7 @@ public class FileSeatRepository implements SeatRepository {
     }
 
     @Override
-    public void deleteSeat(Long id) {
+    public void deleteSeat(Integer id) {
         List<Seat> allSeats = getAllSeats();
 
         List<Seat> listWithoutTheDeletedSeat =

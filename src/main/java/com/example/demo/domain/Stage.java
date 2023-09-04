@@ -7,7 +7,7 @@ public class Stage extends BaseEntity {
     private String name;
     private List<Seat> seatList;
 
-    public Stage(Long id, String name, List<Seat> setList) {
+    public Stage(Integer id, String name, List<Seat> setList) {
         super(id);
         this.name = name;
         this.seatList = setList;

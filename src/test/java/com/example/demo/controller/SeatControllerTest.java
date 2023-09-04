@@ -36,6 +36,10 @@ public class SeatControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.rowName").value(row))
                 .andExpect(jsonPath("$.positionInRow").value(positionInRow));
+    }
+
+    @Test
+    public void shouldSaveNewSeat() throws Exception {
 
     }
 
