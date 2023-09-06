@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.domain.Seat;
 import com.example.demo.repository.SeatRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SeatServiceImpl implements SeatService {
 
+    @Qualifier("jdbcSeatRepository")
     private SeatRepository seatRepository;
+
     @Override
     public List<Seat> getAllSeats() {
         return seatRepository.getAllSeats();

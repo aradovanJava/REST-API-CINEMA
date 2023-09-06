@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.domain.RowName;
 import com.example.demo.domain.Seat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
+@Repository("fileSeatRepository")
 public class FileSeatRepository implements SeatRepository {
     private static final Integer NUMBER_OF_SEAT_ROWS = 3;
     private static final String SEATS_FILE_LOCATION = "dat/seats.txt";
@@ -37,7 +38,7 @@ public class FileSeatRepository implements SeatRepository {
             Integer id = Integer.parseInt(idString);
             String rowName = lines.get(i * NUMBER_OF_SEAT_ROWS + 1);
             Integer rowPosition = Integer.parseInt(lines.get(i * NUMBER_OF_SEAT_ROWS + 2));
-            Seat newSeat = new Seat(id, rowName, rowPosition);
+            Seat newSeat = new Seat(id, RowName.valueOf(rowName), rowPosition);
             seatList.add(newSeat);
         }
 
@@ -70,7 +71,7 @@ public class FileSeatRepository implements SeatRepository {
 
             for(Seat seat : allSeats) {
                 String seatId = String.valueOf(seat.getId());
-                String rowName = seat.getRowName();
+                String rowName = seat.getRowName().name();
                 String positionInRow = String.valueOf(seat.getPositionInRow());
                 bw.write(seatId);
                 bw.newLine();

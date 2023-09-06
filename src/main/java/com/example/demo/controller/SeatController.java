@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Seat;
+import com.example.demo.service.SeatCategoryService;
 import com.example.demo.service.SeatService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class SeatController {
 
     private SeatService seatService;
+    private SeatCategoryService seatCategoryService;
 
     @GetMapping
     public ResponseEntity<?> getSeats() {

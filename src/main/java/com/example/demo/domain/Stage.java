@@ -1,32 +1,29 @@
 package com.example.demo.domain;
 
+import lombok.Data;
+
 import java.util.List;
 import java.util.Objects;
 
+@Data
 public class Stage extends BaseEntity {
     private String name;
+    private String description;
+    private Cinema cinema;
     private List<Seat> seatList;
 
-    public Stage(Integer id, String name, List<Seat> setList) {
+    public Stage(Integer id, String name, String description) {
         super(id);
         this.name = name;
-        this.seatList = setList;
+        this.description = description;
+        this.cinema = cinema;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Stage(Integer id, String name, String description, Cinema cinema) {
+        super(id);
         this.name = name;
-    }
-
-    public List<Seat> getSeatList() {
-        return seatList;
-    }
-
-    public void setSeatList(List<Seat> seatList) {
-        this.seatList = seatList;
+        this.description = description;
+        this.cinema = cinema;
     }
 
     @Override

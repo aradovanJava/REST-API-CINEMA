@@ -3,6 +3,7 @@ package com.example.demo.repository;
 import com.example.demo.domain.Seat;
 import com.example.demo.domain.Stage;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class FileStageRepository implements StageRepository {
 
     private static final Integer NUMBER_OF_STAGE_ROWS = 3;
 
+    @Qualifier("jdbcSeatRepository")
     private SeatRepository seatRepository;
 
     private static final String STAGE_FILE_LOCATION = "dat/stages.txt";
@@ -56,7 +58,8 @@ public class FileStageRepository implements StageRepository {
                 }
             }
 
-            Stage newStage = new Stage(id, stageName, seatList);
+            Stage newStage = new Stage(id, stageName, "");
+            newStage.setSeatList(seatList);
             stageList.add(newStage);
         }
 

@@ -1,5 +1,8 @@
 package com.example.demo.domain;
 
+import lombok.Data;
+
+@Data
 public class SeatCategory extends BaseEntity {
     private String name;
     private String description;
