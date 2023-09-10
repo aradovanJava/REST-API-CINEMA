@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Seat;
+import com.example.demo.domain.Stage;
 import com.example.demo.rowmapper.SeatRowMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,7 +34,7 @@ public class JdbcSeatRepository implements SeatRepository {
     private JdbcTemplate jdbcTemplate;
     @Override
     public List<Seat> getAllSeats() {
-        return jdbcTemplate.query(SQL_GET_ALL_SEATS, new SeatRowMapper());
+        return jdbcTemplate.query(SQL_GET_ALL_SEATS, new SeatRowMapper(this));
     }
 
     @Override
@@ -44,7 +45,7 @@ public class JdbcSeatRepository implements SeatRepository {
         Optional<Seat> optionalSeat = Optional.empty();
 
         try {
-            optionalSeat = Optional.of(jdbcTemplate.queryForObject(sqlGetSeatById, new SeatRowMapper(), id));
+            optionalSeat = Optional.of(jdbcTemplate.queryForObject(sqlGetSeatById, new SeatRowMapper(this), id));
         }
         catch(EmptyResultDataAccessException ex) {
             return optionalSeat;
@@ -77,5 +78,11 @@ public class JdbcSeatRepository implements SeatRepository {
     @Override
     public void deleteSeat(Integer id) {
         jdbcTemplate.update("DELETE FROM SEAT WHERE ID = ?", id);
+    }
+
+    @Override
+    public List<Seat> getAllSeatsByStage(Stage stage) {
+        String sql = SQL_GET_ALL_SEATS + " WHERE S.STAGE_ID = ?";
+        return jdbcTemplate.query(sql, new SeatRowMapper(this), stage.getId());
     }
 }

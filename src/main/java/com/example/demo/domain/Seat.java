@@ -1,15 +1,25 @@
 package com.example.demo.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Entity
 @Data
+@NoArgsConstructor
 public class Seat extends BaseEntity {
+    @Column(name = "ROW_NAME")
+    @Enumerated(EnumType.STRING)
     private RowName rowName;
+
+    @Column(name = "POSITION")
     private Integer positionInRow;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "id")
     private SeatCategory seatCategory;
+
+    @ManyToOne
+    @JoinColumn(name="STAGE_ID", nullable=false)
     private Stage stage;
 
     public Seat(Integer id, RowName rowName, Integer positionInRow) {
@@ -25,4 +35,11 @@ public class Seat extends BaseEntity {
         this.seatCategory = seatCategory;
         this.stage = stage;
     }
+
+    /*
+    @Id
+    public Integer getId() {
+        return super.getId();
+    }
+    */
 }

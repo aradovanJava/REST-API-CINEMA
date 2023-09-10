@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.RowName;
 import com.example.demo.domain.Seat;
+import com.example.demo.domain.Stage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -120,5 +121,10 @@ public class FileSeatRepository implements SeatRepository {
         if(listWithoutTheDeletedSeat.size() != allSeats.size()) {
             saveAllSeatsToFile(listWithoutTheDeletedSeat);
         }
+    }
+
+    @Override
+    public List<Seat> getAllSeatsByStage(Stage stage) {
+        return null;
     }
 }

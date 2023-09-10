@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Seat;
 import com.example.demo.domain.SeatCategory;
+import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.service.SeatCategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,14 @@ public class SeatCategoryController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> getSeatCategoryById(@PathVariable Integer id) {
-        SeatCategory seatCategory = seatCategoryService.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(seatCategory);
+        Optional<SeatCategory> seatCategoryOptional = seatCategoryService.findById(id);
+
+        if(seatCategoryOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(seatCategoryOptional.get());
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Optional.empty());
+        }
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -39,13 +46,18 @@ public class SeatCategoryController {
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> updateNewSeatCategory(@RequestBody SeatCategory seatCategoryWithNewValues, @PathVariable Integer id) {
-        SeatCategory updatedSeatCategory = seatCategoryService.update(seatCategoryWithNewValues, id);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedSeatCategory);
+        try {
+            SeatCategory updatedSeatCategory = seatCategoryService.update(seatCategoryWithNewValues, id);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedSeatCategory);
+        }
+        catch(EntityNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSeatCategoryById(@PathVariable Integer id) {
-        seatCategoryService.delete(seatCategoryService.findById(id));
+        seatCategoryService.delete(seatCategoryService.findById(id).get());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

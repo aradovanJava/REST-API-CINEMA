@@ -1,12 +1,19 @@
 package com.example.demo.rowmapper;
 
 import com.example.demo.domain.*;
+import com.example.demo.repository.SeatRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@AllArgsConstructor
 public class SeatRowMapper implements RowMapper<Seat>  {
+
+    private SeatRepository seatRepository;
 
     @Override
     public Seat mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -28,6 +35,8 @@ public class SeatRowMapper implements RowMapper<Seat>  {
         Stage stage = new Stage(stageId, stageName, stageDescription, cinema);
         SeatCategory seatCategory  = new SeatCategory(seatCategoryId, seatCategoryName, seatCategoryDescription);
         Seat seat = new Seat(seatId, RowName.valueOf(rowName), position, seatCategory, stage);
+
+        //stage.setSeatList(seatRepository.getAllSeatsByStage(stage));
 
         return seat;
     }
