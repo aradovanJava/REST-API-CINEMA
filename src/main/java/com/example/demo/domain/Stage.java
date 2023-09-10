@@ -1,15 +1,24 @@
 package com.example.demo.domain;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Objects;
 
 @Data
+@Entity
+@NoArgsConstructor
 public class Stage extends BaseEntity {
     private String name;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name="CINEMA_ID", nullable=false)
     private Cinema cinema;
+
+    @OneToMany(mappedBy="stage")
     private List<Seat> seatList;
 
     public Stage(Integer id, String name, String description) {
@@ -30,6 +39,13 @@ public class Stage extends BaseEntity {
     public String toString() {
         return name;
     }
+
+    /*
+    @Id
+    public Integer getId() {
+        return super.getId();
+    }
+    */
 
     @Override
     public boolean equals(Object o) {
