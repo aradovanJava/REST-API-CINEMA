@@ -56,9 +56,8 @@ public class JdbcSeatRepository implements SeatRepository {
 
     @Override
     public void saveNewSeat(Seat newSeat) {
-        jdbcTemplate.update("INSERT INTO SEAT(ROW_NAME, POSITION, CATEGORY_ID, STAGE_ID)\n" +
-                "VALUES(?, ?, ?, ?)", newSeat.getRowName(), newSeat.getPositionInRow(), newSeat.getSeatCategory().getId(),
-                newSeat.getStage().getId());
+        jdbcTemplate.update("INSERT INTO SEAT(ROW_NAME, POSITION, CATEGORY_ID)\n" +
+                "VALUES(?, ?, ?, ?)", newSeat.getRowName(), newSeat.getPositionInRow(), newSeat.getSeatCategory().getId());
     }
 
     @Override

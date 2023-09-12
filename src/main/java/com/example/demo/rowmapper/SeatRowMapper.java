@@ -32,9 +32,8 @@ public class SeatRowMapper implements RowMapper<Seat>  {
         String cinemaAddress = rs.getString("ADDRESS");
 
         Cinema cinema = new Cinema(cinemaId, cinemaName, cinemaAddress);
-        Stage stage = new Stage(stageId, stageName, stageDescription, cinema);
         SeatCategory seatCategory  = new SeatCategory(seatCategoryId, seatCategoryName, seatCategoryDescription);
-        Seat seat = new Seat(seatId, RowName.valueOf(rowName), position, seatCategory, stage);
+        Seat seat = new Seat(seatId, RowName.valueOf(rowName), position, seatCategory);
 
         //stage.setSeatList(seatRepository.getAllSeatsByStage(stage));
 

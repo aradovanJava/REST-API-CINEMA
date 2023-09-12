@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +22,7 @@ public class Seat extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name="STAGE_ID", nullable=false)
+    @JsonIgnore
     private Stage stage;
 
     public Seat(Integer id, RowName rowName, Integer positionInRow) {
@@ -28,12 +31,11 @@ public class Seat extends BaseEntity {
         this.positionInRow = positionInRow;
     }
 
-    public Seat(Integer id, RowName rowName, Integer positionInRow, SeatCategory seatCategory, Stage stage) {
+    public Seat(Integer id, RowName rowName, Integer positionInRow, SeatCategory seatCategory) {
         super(id);
         this.rowName = rowName;
         this.positionInRow = positionInRow;
         this.seatCategory = seatCategory;
-        this.stage = stage;
     }
 
     /*

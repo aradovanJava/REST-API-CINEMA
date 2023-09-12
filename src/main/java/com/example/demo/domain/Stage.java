@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,7 @@ public class Stage extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name="CINEMA_ID", nullable=false)
+    @JsonIgnore
     private Cinema cinema;
 
     @OneToMany(mappedBy="stage")
